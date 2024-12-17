@@ -41,7 +41,13 @@ if __name__ == "__main__":
     # Optional: Visualize as heatmap
     selected_mf_state = 0  # Index of the mf state to display. Note that it's not the same as mf since index can only be positive.
     data_2d = raw_2d_data[:, :, selected_mf_state]
-    plt.imshow(data_2d, extent=[-30, 30, -10, 10], origin='lower', aspect='auto', cmap="viridis")
+    print(np.shape(data_2d))
+    min_value = np.min(data_2d)  # Find the minimum value in the 2D array
+    min_position = np.unravel_index(np.argmin(data_2d), data_2d.shape)  # Get coordinates of min value
+
+    print(f"  Lowest potential value: {min_value}")
+    print(f"  Position (row, col): {min_position}")
+    plt.imshow(data_2d, extent=[-800, 800, -800, 800], origin='lower', aspect='auto', cmap="viridis")
     plt.colorbar(label="Potential")
     plt.title("2D Raw Trap Data")
     plt.xlabel("X axis (nm)")
