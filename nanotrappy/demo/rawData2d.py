@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     # Atomic system and surface
     syst = nt.atomicsystem(nt.Caesium(), "6S1/2", f3)
-    surface = nt.CylindricalSurface(axis=nt.AxisZ(), radius=180e-9)
+    surface = nt.CylindricalSurface(axis=nt.AxisZ(), radius=220e-9)
 
     # Initialize simulation
     Simul = nt.Simulation(syst, nt.SiO2(), trap, datafolder)
@@ -44,9 +44,13 @@ if __name__ == "__main__":
     print(np.shape(data_2d))
     min_value = np.min(data_2d)  # Find the minimum value in the 2D array
     min_position = np.unravel_index(np.argmin(data_2d), data_2d.shape)  # Get coordinates of min value
+    data_2d_slice = data_2d[100,:]
+    val2 = np.min(data_2d_slice)
+
 
     print(f"  Lowest potential value: {min_value}")
     print(f"  Position (row, col): {min_position}")
+    print(f"  Val2: {val2}")
     plt.imshow(data_2d, extent=[-800, 800, -800, 800], origin='lower', aspect='auto', cmap="viridis")
     plt.colorbar(label="Potential")
     plt.title("2D Raw Trap Data")
