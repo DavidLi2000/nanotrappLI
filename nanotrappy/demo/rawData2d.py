@@ -10,15 +10,15 @@ if __name__ == "__main__":
     datafolder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "testfolder")
 
     # Define beams
-    red_beam = nt.BeamPair(937e-9, 0.3 * mW, 937e-9, 0.4 * mW)
-    blue_beam = nt.BeamPair(685.5e-9, 5 * mW, 685.6e-9, 4.5 * mW)
+    red_beam = nt.BeamPair(937e-9, 0.4 * mW, 937e-9, 0.4 * mW)
+    blue_beam = nt.BeamPair(685.5e-9, 4.5 * mW, 685.6e-9, 4.5 * mW)
 
     # Define the trap
     trap = nt.Trap_beams(blue_beam, red_beam)
 
     # Atomic system and surface
     syst = nt.atomicsystem(nt.Caesium(), "6S1/2", f3)
-    surface = nt.CylindricalSurface(axis=nt.AxisZ(), radius=220e-9)
+    surface = nt.CylindricalSurface(axis=nt.AxisZ(), radius=180e-9)
 
     # Initialize simulation
     Simul = nt.Simulation(syst, nt.SiO2(), trap, datafolder)
@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     print(f"  Lowest potential value: {min_value}")
     print(f"  Position (row, col): {min_position}")
-    print(f"  Val2: {val2}")
+    print(f"  Val2: {val2}") #saddle
     plt.imshow(data_2d, extent=[-800, 800, -800, 800], origin='lower', aspect='auto', cmap="viridis")
     plt.colorbar(label="Potential")
     plt.title("2D Raw Trap Data")
